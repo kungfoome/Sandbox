@@ -130,6 +130,7 @@
     - { role: openobserve, tags: ['openobserve'] }
     - { role: paperless_ai, tags: ['paperless-ai'] }
     - { role: paperless_ngx, tags: ['paperless-ngx'] }
+    - { role: pelican, tags: ['pelican'] }
     - { role: pgadmin, tags: ['pgadmin'] }
     - { role: photoprism, tags: ['photoprism'] }
     - { role: phpmyadmin, tags: ['phpmyadmin'] }
@@ -190,6 +191,7 @@
     - { role: watchstate, tags: ['watchstate'] }
     - { role: watchtower, tags: ['watchtower'] }
     - { role: wikijs, tags: ['wikijs'] }
+    - { role: wings, tags: ['wings'] }
     - { role: wireguard, tags: ['wireguard'] }
     - { role: wizarr, tags: ['wizarr'] }
     - { role: wordpress, tags: ['wordpress'] }

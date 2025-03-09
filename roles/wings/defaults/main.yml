@@ -1,0 +1,137 @@
+##########################################################################
+# Title:         Sandbox: Wings | Default Variables                      #
+# Author(s):     kungfoome                                                  #
+# URL:           https://github.com/saltyorg/Sandbox                    #
+# --                                                                    #
+##########################################################################
+#                   GNU General Public License v3.0                     #
+##########################################################################
+---
+################################
+# Basics
+################################
+
+wings_name: wings
+
+################################
+# Paths
+################################
+
+wings_paths_folder: "{{ wings_name }}"
+wings_paths_location: "{{ server_appdata_path }}/{{ wings_paths_folder }}"
+wings_paths_folders_list:
+  - "{{ wings_paths_location }}"
+  - "{{ wings_paths_location }}/config"
+  - "{{ wings_paths_location }}/data"
+  - "{{ wings_paths_location }}/logs"
+  - "{{ wings_paths_location }}/tmp"
+  - "{{ wings_paths_location }}/certs"
+
+################################
+# Settings
+################################
+
+wings_api_port: "8080"
+wings_sftp_port: "2022"
+
+################################
+# Docker
+################################
+
+# Container
+wings_docker_container: "{{ wings_name }}"
+
+# Image
+wings_docker_image_pull: true
+wings_docker_image_tag: "latest"
+wings_docker_image: "ghcr.io/pelican-dev/wings:{{ wings_docker_image_tag }}"
+
+# Ports
+wings_docker_ports_defaults:
+  - "{{ wings_api_port }}:8080"
+  - "{{ wings_sftp_port }}:2022"
+wings_docker_ports_custom: []
+wings_docker_ports: "{{ wings_docker_ports_defaults
+                       + wings_docker_ports_custom }}"
+
+# Envs
+wings_docker_envs_default:
+  TZ: "{{ tz }}"
+  WINGS_UID: "{{ uid }}"
+  WINGS_GID: "{{ gid }}"
+  WINGS_USERNAME: "{{ user.name }}"
+
+wings_docker_envs_custom: {}
+wings_docker_envs: "{{ wings_docker_envs_default
+                      | combine(wings_docker_envs_custom) }}"
+
+# Commands
+wings_docker_commands_default: []
+wings_docker_commands_custom: []
+wings_docker_commands: "{{ wings_docker_commands_default
+                         + wings_docker_commands_custom }}"
+
+# Volumes
+wings_docker_volumes_default:
+  - "/var/run/docker.sock:/var/run/docker.sock"
+  - "/var/lib/docker/containers/:/var/lib/docker/containers/"
+  - "{{ wings_paths_location }}/config:/etc/pelican"
+  - "{{ wings_paths_location }}/data:/var/lib/pelican"
+  - "{{ wings_paths_location }}/logs:/var/log/pelican"
+  - "{{ wings_paths_location }}/tmp:/tmp/pelican"
+  - "{{ wings_paths_location }}/certs:/etc/ssl/certs"
+
+wings_docker_volumes_custom: []
+wings_docker_volumes: "{{ wings_docker_volumes_default
+                         + wings_docker_volumes_custom }}"
+
+# Devices
+wings_docker_devices_default: []
+wings_docker_devices_custom: []
+wings_docker_devices: "{{ wings_docker_devices_default
+                         + wings_docker_devices_custom }}"
+
+# Hosts
+wings_docker_hosts_default: {}
+wings_docker_hosts_custom: {}
+wings_docker_hosts: "{{ docker_hosts_common
+                       | combine(wings_docker_hosts_default)
+                       | combine(wings_docker_hosts_custom) }}"
+
+# Labels
+wings_docker_labels_default: {}
+wings_docker_labels_custom: {}
+wings_docker_labels: "{{ docker_labels_common
+                        | combine(wings_docker_labels_default)
+                        | combine(wings_docker_labels_custom) }}"
+
+# Hostname
+wings_docker_hostname: "{{ wings_name }}"
+
+# Networks
+wings_docker_networks_alias: "{{ wings_name }}"
+wings_docker_networks_default: []
+wings_docker_networks_custom: []
+wings_docker_networks: "{{ docker_networks_common
+                          + wings_docker_networks_default
+                          + wings_docker_networks_custom }}"
+
+# Capabilities
+wings_docker_capabilities_default:
+  - "NET_ADMIN"
+  - "SYS_NICE"
+wings_docker_capabilities_custom: []
+wings_docker_capabilities: "{{ wings_docker_capabilities_default
+                             + wings_docker_capabilities_custom }}"
+
+# Security Opts
+wings_docker_security_opts_default: []
+wings_docker_security_opts_custom: []
+wings_docker_security_opts: "{{ wings_docker_security_opts_default
+                              + wings_docker_security_opts_custom }}"
+
+# Restart Policy
+wings_docker_restart_policy: unless-stopped
+
+# State
+wings_docker_state: started 
