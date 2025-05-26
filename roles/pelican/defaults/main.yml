@@ -21,7 +21,7 @@ pelican_paths_folder: "{{ pelican_name }}"
 pelican_paths_location: "{{ server_appdata_path }}/{{ pelican_paths_folder }}"
 pelican_paths_folders_list:
   - "{{ pelican_paths_location }}"
-  - "{{ pelican_paths_location }}/logs"
+  - "{{ pelican_paths_location }}/config"
   - "{{ pelican_paths_location }}/data"
 
 ################################
@@ -93,8 +93,8 @@ pelican_docker_commands: "{{ pelican_docker_commands_default
 
 # Volumes
 pelican_docker_volumes_default:
-  - "{{ pelican_paths_location }}/logs:/var/www/html/storage/logs"
-  - "{{ pelican_paths_location }}/data:/pelican-data"
+  - "{{ pelican_paths_location }}/config:/pelican/config"
+  - "{{ pelican_paths_location }}/data:/pelican/data"
 
 pelican_docker_volumes_custom: []
 pelican_docker_volumes: "{{ pelican_docker_volumes_default
