@@ -1,6 +1,6 @@
 #########################################################################
-# Title:            Sandbox: Stash                                      #
-# Author(s):        -SK, kowalski                                       #
+# Title:            Sandbox: Profilarr | Deployment Tasks               #
+# Author(s):        keldian                                             #
 # URL:              https://github.com/saltyorg/Sandbox                 #
 # --                                                                    #
 #########################################################################
@@ -20,13 +20,5 @@
 - name: Create directories
   ansible.builtin.include_tasks: "{{ resources_tasks_path }}/directories/create_directories.yml"
 
-- name: Docker Devices Task
-  ansible.builtin.include_tasks: "{{ resources_tasks_path }}/docker/set_docker_devices_variable.yml"
-  when: gpu.intel or use_nvidia
-
 - name: Create Docker container
   ansible.builtin.include_tasks: "{{ resources_tasks_path }}/docker/create_docker_container.yml"
-
-- name: "Set auth entries in config"
-  ansible.builtin.import_tasks: "subtasks/auth.yml"
-  when: (stash_traefik_sso_middleware | length > 0) and (not continuous_integration)

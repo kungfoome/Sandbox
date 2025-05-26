@@ -18,7 +18,6 @@ tubearchivist_name: tubearchivist
 # Settings
 ################################
 
-tubearchivist_redis_docker_image_tag: "latest"
 tubearchivist_enable_cast: "false"
 
 ################################
@@ -73,7 +72,7 @@ tubearchivist_docker_container: "{{ tubearchivist_name }}"
 
 # Image
 tubearchivist_docker_image_pull: true
-tubearchivist_docker_image_tag: "latest"
+tubearchivist_docker_image_tag: "v0.4.13"
 tubearchivist_docker_image: "bbilly1/tubearchivist:{{ tubearchivist_docker_image_tag }}"
 
 # Ports

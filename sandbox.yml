@@ -93,6 +93,7 @@
     - { role: jellyseerr, tags: ['jellyseerr'] }
     - { role: jellystat, tags: ['jellystat'] }
     - { role: joplin, tags: ['joplin'] }
+    - { role: karakeep, tags: ['karakeep'] }
     - { role: kavita, tags: ['kavita'] }
     - { role: kcptun_client, tags: ['kcptun-client'] }
     - { role: kcptun_server, tags: ['kcptun-server'] }
@@ -107,6 +108,8 @@
     - { role: logarr, tags: ['logarr'] }
     - { role: lunasea, tags: ['lunasea'] }
     - { role: makemkv, tags: ['makemkv'] }
+    - { role: maybe_finance, tags: ['maybe-finance'] }
+    - { role: mealie, tags: ['mealie'] }
     - { role: medusa, tags: ['medusa'] }
     - { role: meilisearch, tags: ['meilisearch'] }
     - { role: minecraft, tags: ['minecraft'] }
@@ -141,6 +144,7 @@
     - { role: plexshare, tags: ['plexshare'] }
     - { role: plextraktsync, tags: ['plextraktsync'] }
     - { role: privatebin, tags: ['privatebin'] }
+    - { role: profilarr, tags: ['profilarr'] }
     - { role: puddletag, tags: ['puddletag'] }
     - { role: pufferpanel, tags: ['pufferpanel'] }
     - { role: pyload, tags: ['pyload'] }
