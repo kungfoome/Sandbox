@@ -34,6 +34,9 @@ pelican_web_port: "80"
 pelican_web_url: "{{ 'https://' + (pelican_web_subdomain + '.' + pelican_web_domain
                 if (pelican_web_subdomain | length > 0)
                 else pelican_web_domain) }}"
+pelican_web_app_domain: "{{ (pelican_web_subdomain + '.' + pelican_web_domain
+                if (pelican_web_subdomain | length > 0)
+                else pelican_web_domain) }}"
 
 ################################
 # DNS
@@ -73,15 +76,17 @@ pelican_docker_ports: "{{ pelican_docker_ports_defaults
 
 # Envs
 pelican_docker_envs_default:
-  APP_URL: "{{ pelican_web_url }}"
   ADMIN_EMAIL: "{{ user.email }}"
-  ADMIN_USERNAME: "{{ user.name }}"
   ADMIN_PASSWORD: "{{ user.pass }}"
+  ADMIN_USERNAME: "{{ user.name }}"
   APP_DEBUG: "false"
   APP_ENV: "production"
+  APP_URL: "{{ pelican_web_url }}"
+  AUTO_HTTPS: "off"
   MAIL_DRIVER: "log"
-  PUID: "{{ uid }}"
   PGID: "{{ gid }}"
+  PUID: "{{ uid }}"
+  TZ: "{{ tz }}"
 
 pelican_docker_envs_custom: {}
 pelican_docker_envs: "{{ pelican_docker_envs_default
