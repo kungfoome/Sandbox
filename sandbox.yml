@@ -133,7 +133,8 @@
     - { role: openobserve, tags: ['openobserve'] }
     - { role: paperless_ai, tags: ['paperless-ai'] }
     - { role: paperless_ngx, tags: ['paperless-ngx'] }
-    - { role: pelican, tags: ['pelican'] }
+    - { role: pelican_panel, tags: ['pelican-panel'] }
+    - { role: pelican_wings, tags: ['pelican-wings'] }
     - { role: pgadmin, tags: ['pgadmin'] }
     - { role: photoprism, tags: ['photoprism'] }
     - { role: phpmyadmin, tags: ['phpmyadmin'] }

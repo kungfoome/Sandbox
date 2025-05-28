@@ -1,10 +1,10 @@
 ##########################################################################
-# Title:         Sandbox: Pelican                                        #
-# Author(s):     kungfoome                                                  #
-# URL:           https://github.com/saltyorg/Sandbox                    #
-# --                                                                    #
+# Title:         Sandbox: Pelican Panel                                  #
+# Author(s):     kungfoome                                               #
+# URL:           https://github.com/saltyorg/Sandbox                     #
+# --                                                                     #
 ##########################################################################
-#                   GNU General Public License v3.0                     #
+#                   GNU General Public License v3.0                      #
 ##########################################################################
 ---
 - name: Add DNS record

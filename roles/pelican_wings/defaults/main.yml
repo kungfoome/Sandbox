@@ -1,0 +1,156 @@
+##########################################################################
+# Title:         Sandbox: Pelican Wings | Default Variables              #
+# Author(s):     kungfoome                                               #
+# URL:           https://github.com/saltyorg/Sandbox                     #
+# --                                                                     #
+##########################################################################
+#                   GNU General Public License v3.0                      #
+##########################################################################
+---
+################################
+# Basics
+################################
+
+pelican_wings_name: wings
+
+################################
+# Paths
+################################
+
+pelican_wings_paths_folder: "{{ pelican_panel_name | default('pelican') }}/{{ pelican_wings_name }}"
+pelican_wings_paths_location: "{{ server_appdata_path }}/{{ pelican_wings_paths_folder }}"
+pelican_wings_paths_folders_list:
+  - "{{ pelican_wings_paths_location }}"
+  - "{{ pelican_wings_paths_location }}/lib"
+  - "{{ pelican_wings_paths_location }}/logs"
+  - "{{ pelican_wings_paths_location }}/config"
+  - "/tmp/{{ pelican_wings_name }}"
+
+################################
+# Web
+################################
+
+pelican_wings_web_subdomain: "{{ pelican_wings_name }}"
+pelican_wings_web_domain: "{{ user.domain }}"
+pelican_wings_web_port: "8080"
+pelican_wings_web_url: "{{ 'https://' + (pelican_wings_web_subdomain + '.' + pelican_wings_web_domain
+                if (pelican_wings_web_subdomain | length > 0)
+                else pelican_wings_web_domain) }}"
+pelican_wings_web_app_domain: "{{ (pelican_wings_web_subdomain + '.' + pelican_wings_web_domain
+                if (pelican_wings_web_subdomain | length > 0)
+                else pelican_wings_web_domain) }}"
+
+################################
+# DNS
+################################
+
+pelican_wings_dns_record: "{{ pelican_wings_web_subdomain }}"
+pelican_wings_dns_zone: "{{ pelican_wings_web_domain }}"
+pelican_wings_dns_proxy: "{{ dns.proxied }}"
+
+################################
+# Traefik
+################################
+
+pelican_wings_traefik_sso_middleware: "{{ traefik_default_sso_middleware }}"
+pelican_wings_traefik_middleware_default: "{{ traefik_default_middleware }}"
+pelican_wings_traefik_middleware_custom: ""
+pelican_wings_traefik_certresolver: "{{ traefik_default_certresolver }}"
+pelican_wings_traefik_enabled: true
+
+################################
+# Docker
+################################
+
+# Container
+pelican_wings_docker_container: "{{ pelican_wings_name }}"
+
+# Image
+pelican_wings_docker_image_pull: true
+pelican_wings_docker_image_tag: "latest"
+pelican_wings_docker_image: "ghcr.io/pelican-dev/wings:latest:{{ pelican_wings_docker_image_tag }}"
+
+# Ports
+pelican_wings_docker_ports_defaults: []
+pelican_wings_docker_ports_custom: []
+pelican_wings_docker_ports: "{{ pelican_wings_docker_ports_defaults
+                         + pelican_wings_docker_ports_custom }}"
+
+# Envs
+pelican_wings_docker_envs_default:
+  TZ: "{{ tz }}"
+  WINGS_UID: "{{ gid }}"
+  WINGS_GID: "{{ uid }}"
+  WINGS_USERNAME: "{{ user.name }}"
+
+pelican_wings_docker_envs_custom: {}
+pelican_wings_docker_envs: "{{ pelican_wings_docker_envs_default
+                        | combine(pelican_wings_docker_envs_custom) }}"
+
+# Commands
+pelican_wings_docker_commands_default: []
+pelican_wings_docker_commands_custom: []
+pelican_wings_docker_commands: "{{ pelican_wings_docker_commands_default
+                           + pelican_wings_docker_commands_custom }}"
+
+# Volumes
+pelican_wings_docker_volumes_default:
+  - "{{ pelican_wings_paths_location }}/lib:/var/lib/pelican/"
+  - "{{ pelican_wings_paths_location }}/logs:/var/log/pelican/"
+  - "{{ pelican_wings_paths_location }}/config:/etc/pelican/"
+  - "/tmp/{{ pelican_wings_name }}:/tmp/pelican/"
+  - "/var/run/docker.sock:/var/run/docker.sock"
+  - "/var/lib/docker/containers/:/var/lib/docker/containers/"
+
+pelican_wings_docker_volumes_custom: []
+pelican_wings_docker_volumes: "{{ pelican_wings_docker_volumes_default
+                           + pelican_wings_docker_volumes_custom }}"
+
+# Devices
+pelican_wings_docker_devices_default: []
+pelican_wings_docker_devices_custom: []
+pelican_wings_docker_devices: "{{ pelican_wings_docker_devices_default
+                           + pelican_wings_docker_devices_custom }}"
+
+# Hosts
+pelican_wings_docker_hosts_default: {}
+pelican_wings_docker_hosts_custom: {}
+pelican_wings_docker_hosts: "{{ docker_hosts_common
+                         | combine(pelican_wings_docker_hosts_default)
+                         | combine(pelican_wings_docker_hosts_custom) }}"
+
+# Labels
+pelican_wings_docker_labels_default: {}
+pelican_wings_docker_labels_custom: {}
+pelican_wings_docker_labels: "{{ docker_labels_common
+                          | combine(pelican_wings_docker_labels_default)
+                          | combine(pelican_wings_docker_labels_custom) }}"
+
+# Hostname
+pelican_wings_docker_hostname: "{{ pelican_wings_name }}"
+
+# Networks
+pelican_wings_docker_networks_alias: "{{ pelican_wings_name }}"
+pelican_wings_docker_networks_default: []
+pelican_wings_docker_networks_custom: []
+pelican_wings_docker_networks: "{{ docker_networks_common
+                            + pelican_wings_docker_networks_default
+                            + pelican_wings_docker_networks_custom }}"
+
+# Capabilities
+pelican_wings_docker_capabilities_default: []
+pelican_wings_docker_capabilities_custom: []
+pelican_wings_docker_capabilities: "{{ pelican_wings_docker_capabilities_default
+                               + pelican_wings_docker_capabilities_custom }}"
+
+# Security Opts
+pelican_wings_docker_security_opts_default: []
+pelican_wings_docker_security_opts_custom: []
+pelican_wings_docker_security_opts: "{{ pelican_wings_docker_security_opts_default
+                                + pelican_wings_docker_security_opts_custom }}"
+
+# Restart Policy
+pelican_wings_docker_restart_policy: unless-stopped
+
+# State
+pelican_wings_docker_state: started 
